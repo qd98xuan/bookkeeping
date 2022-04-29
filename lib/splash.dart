@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bookkeeping/db/database_utils.dart';
 import 'package:bookkeeping/myapp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
+    DatabaseUtils databaseUtils = DatabaseUtils();
     return MaterialApp(
         title: '快来记账吧',
         debugShowCheckedModeBanner: false,
@@ -31,7 +33,7 @@ class _SplashState extends State<Splash> {
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 onPressed: () async {
-
+                  databaseUtils.openDatabse();
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => MyApp()),

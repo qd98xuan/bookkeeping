@@ -25,9 +25,12 @@ class DatabaseUtils{
   //插入一条数据
   insertExpenses(name,remark,price,class_id,class_name)async{
     var id = getUUid();
-    var input_time = DateTime.now().year.toString()+"-"+DateTime.now().month.toString()+"-"+DateTime.now().day.toString()+"-"+DateTime.now().hour.toString()+"-"+DateTime.now().minute.toString()+"-"+DateTime.now().second.toString();
+    var input_time = DateTime.now().year.toString()+"-"+DateTime.now().month.toString()+"-"+DateTime.now().day.toString()+" "+DateTime.now().hour.toString()+":"+DateTime.now().minute.toString()+":"+DateTime.now().second.toString();
+    String sql = "INSERT INTO Expenses (id,name,remark,input_time,price,class_id,class_name) VALUES ('${id}','${name}','${remark}','${input_time}',${price},'${class_id}','${class_name}')";
+    print(sql);
     await db?.transaction((txn) async{
-      txn.rawInsert("INSERT INTO Expenses (id,name,remark,input_time,price,class_id,class_name) VALUES (${id},${name},${remark},${input_time},${price},${class_id},${class_name})");
+      var count = txn.rawInsert(sql);
+      print("插入行数:${count}");
     });
   }
   
@@ -35,7 +38,8 @@ class DatabaseUtils{
   selectAllExpenses()async{
     if(db!=null) {
       List<Map> datas = await db!.rawQuery(
-          'SELECT name,price,input_time,class_name FROM Expenses');
+          'SELECT name,price,input_time,class_name,class_id FROM Expenses');
+      print(datas);
       return datas;
     }
     return List.empty();
@@ -50,6 +54,7 @@ class DatabaseUtils{
     var timenumber = DateTime.now().millisecondsSinceEpoch;//时间
     var uuid = "$randomstr" + "$timenumber";
     print(uuid);
+    return uuid;
   }
 
 }
