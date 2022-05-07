@@ -4,6 +4,7 @@ import 'package:bookkeeping/db/database_utils.dart';
 import 'package:bookkeeping/myapp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Splash extends StatefulWidget {
@@ -43,7 +44,10 @@ class _SplashState extends State<Splash> {
               ),
             );
           },
-        ));
+        ),
+      navigatorObservers: [FlutterSmartDialog.observer],
+      builder: FlutterSmartDialog.init(),
+    );
   }
 
   @override

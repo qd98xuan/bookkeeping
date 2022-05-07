@@ -37,6 +37,8 @@ dependencies:
 
   sqflite: ^2.0.2
 
+  flutter_smart_dialog: ^4.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

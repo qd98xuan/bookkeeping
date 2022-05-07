@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:bookkeeping/add_view.dart';
 import 'package:bookkeeping/db/class_data.dart';
 import 'package:bookkeeping/db/database_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,35 +38,52 @@ class _MyAppState extends State<MyApp> {
         child: Icon(Icons.add),
         onPressed: () async {
           //点击新增一个记录
-
-          await databaseUtils.openDatabse();
-          await databaseUtils.insertExpenses(
-              "apple", "hi", "12", "001",classDatas['001']!.name);
-          _loadData();
+          Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => AddView()))
+              .then((value) => {
+                    setState(() async {
+                      if (value == true) {
+                        await databaseUtils.openDatabse();
+                        _loadData();
+                      }
+                    })
+                  });
+          // await databaseUtils.openDatabse();
+          // await databaseUtils.insertExpenses(
+          //     "apple", "hi", "12", "0",classDatas[0]!.name);
+          // _loadData();
         },
       ),
     );
   }
 
-  showList(){
-    if(_datas.isEmpty){
+  showList() {
+    if (_datas.isEmpty) {
       return Container(
         alignment: Alignment.center,
         padding: EdgeInsets.all(5),
-        child: Text("暂无数据",style: TextStyle(color: Colors.grey),textAlign: TextAlign.center,),
+        child: Text(
+          "暂无数据",
+          style: TextStyle(color: Colors.grey),
+          textAlign: TextAlign.center,
+        ),
       );
-    }else{
+    } else {
       return ListView.builder(
         itemBuilder: (context, index) {
           return Container(
-            child:ExpensesItem(_datas[index]['input_time'],_datas[index]['class_name'],_datas[index]['name'],_datas[index]['price'].toString(),classDatas[_datas[index]['class_id'].toString()]!.icon),
+            child: ExpensesItem(
+                _datas[index]['input_time'],
+                _datas[index]['class_name'],
+                _datas[index]['name'],
+                _datas[index]['price'].toString(),
+                classDatas[int.parse(_datas[index]['class_id'])]!.icon),
           );
         },
         itemCount: _datas.length,
       );
     }
   }
-
 
   @override
   void initState() {

@@ -48,7 +48,7 @@ class ExpensesItem extends StatelessWidget {
           ),
           Row(
             children: [
-              Expanded(child: Icon(icon),flex: 1,),
+              Expanded(child: Icon(icon,color: Colors.blue,),flex: 1,),
               Expanded(
                 child: Text(
                   "${name}",
