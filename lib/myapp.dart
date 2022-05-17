@@ -24,6 +24,9 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("快来记账吧"),
+        leading: IconButton(onPressed: (){
+
+        }, icon: Icon(Icons.bubble_chart)),
       ),
       body: Container(
         child: RefreshIndicator(
@@ -48,10 +51,6 @@ class _MyAppState extends State<MyApp> {
                       }
                     })
                   });
-          // await databaseUtils.openDatabse();
-          // await databaseUtils.insertExpenses(
-          //     "apple", "hi", "12", "0",classDatas[0]!.name);
-          // _loadData();
         },
       ),
     );
