@@ -33,12 +33,22 @@ class DatabaseUtils{
       print("插入行数:${count}");
     });
   }
-  
+
   //查询当前所有的数据
   selectAllExpenses()async{
     if(db!=null) {
       List<Map> datas = await db!.rawQuery(
           'SELECT name,price,input_time,class_name,class_id FROM Expenses');
+      print(datas);
+      return datas;
+    }
+    return List.empty();
+  }
+
+  //按照分类查询总数
+  selectPriceGroupByClass()async {
+    if(db!=null){
+      List<Map> datas = await db!.rawQuery("SELECT sum(price),class_name FROM Expenses GROUP BY class_id");
       print(datas);
       return datas;
     }

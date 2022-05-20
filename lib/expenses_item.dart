@@ -59,7 +59,7 @@ class ExpensesItem extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  "支出: ${price} 元",
+                  "支出: ${price.toString()} 元",
                   style: TextStyle(color: Colors.black, fontSize: 15),
                   textAlign: TextAlign.right,
                 ),

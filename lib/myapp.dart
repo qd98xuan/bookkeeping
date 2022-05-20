@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:bookkeeping/add_view.dart';
 import 'package:bookkeeping/db/class_data.dart';
 import 'package:bookkeeping/db/database_utils.dart';
+import 'package:bookkeeping/statistic_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: const Text("快来记账吧"),
         leading: IconButton(onPressed: (){
-
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>StatisticView()));
         }, icon: Icon(Icons.bubble_chart)),
       ),
       body: Container(
